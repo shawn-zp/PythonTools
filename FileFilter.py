@@ -31,7 +31,16 @@ for op, value in opts:
 if input_dir == "" or output_dir == "" or file_suffix == "":
 	print("args are invalid!")
 	sys.exit()
+if os.path.exists(output_dir):
+	try:
+		os.rmdir(output_dir)
+	except:
+		print("\ntarget directory is not empty! ")
+		inputValue = input("press any key to continue, press 'q' to quit: ")
+		if inputValue == "q":
+			sys.exit() 
 
+print("working...")
 for parent, dirnames, filenames in os.walk(input_dir):
     for filename in filenames:
     	needSave = filename.endswith(file_suffix)
